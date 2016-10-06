@@ -1,14 +1,15 @@
 //
-//  TableViewController.swift
-//  CustomCellFun
+//  ViewController.swift
+//  CustomCell
 //
-//  Created by James Campagno on 6/16/16.
+//  Created by Rama Milaneh on 10/6/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+    
     
     let reuseIdentifier = "friendCell"
     var thrillerAlbum: [Song] = []
@@ -33,35 +34,29 @@ class TableViewController: UITableViewController {
         thrillerAlbum = [firstTrack, secondTrack, thirdTrack, fourthTrack, fifthTrack, sixthTrack, seventhTrack, eightTrack, ninthTrack]
     }
 
-    
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
+        override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return thrillerAlbum.count
         
     }
-
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SongCell
-        
-        cell.backgroundColor = UIColor.gray
-
-        let song = thrillerAlbum[indexPath.row]
-    
-        cell.nameOfSongLabel.text? = song.name
-        cell.lengthOfSongLabel.text? = song.length
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
+        cell.singerImagelabel.image = UIImage(named: "Thriller")
+        cell.songNameLabel.text = thrillerAlbum[indexPath.row].name
+        cell.durationLabel.text = thrillerAlbum[indexPath.row].length
         return cell
     }
- 
+
 
 }
+
